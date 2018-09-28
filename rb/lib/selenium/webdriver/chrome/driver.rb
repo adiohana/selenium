@@ -59,7 +59,7 @@ module Selenium
         def quit
           super
         ensure
-          @service.stop if @service
+          @service&.stop
         end
 
         def execute_cdp(cmd, **params)
