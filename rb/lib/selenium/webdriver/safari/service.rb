@@ -24,8 +24,8 @@ module Selenium
 
       class Service < WebDriver::Service
         DEFAULT_PORT = 7050
-        @executable = 'safaridriver'.freeze
-        @missing_text = <<-ERROR.gsub(/\n +| {2,}/, ' ').freeze
+        EXECUTABLE = 'safaridriver'.freeze
+        MISSING_TEXT = <<~ERROR.freeze
           Unable to find Apple's safaridriver which comes with Safari 10.
           More info at https://webkit.org/blog/6900/webdriver-support-in-safari-10/
         ERROR
