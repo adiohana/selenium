@@ -46,8 +46,6 @@ module Selenium
             IE::Driver.new(opts)
           when :safari
             Safari::Driver.new(opts)
-          when :phantomjs
-            PhantomJS::Driver.new(opts)
           when :firefox, :ff
             Firefox::Driver.new(opts)
           when :edge
