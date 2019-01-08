@@ -18,6 +18,8 @@
 module Selenium
   module WebDriver
     class Element
+      ELEMENT_KEY = 'element-6066-11e4-a52e-4f735466cecf'.freeze
+
       include SearchContext
 
       #
@@ -310,12 +312,7 @@ module Selenium
       #
 
       def as_json(*)
-        key = if bridge.dialect == :w3c
-                'element-6066-11e4-a52e-4f735466cecf'
-              else
-                'ELEMENT'
-              end
-        @id.is_a?(Hash) ? @id : {key => @id}
+        @id.is_a?(Hash) ? @id : {ELEMENT_KEY => @id}
       end
 
       private
