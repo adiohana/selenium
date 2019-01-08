@@ -139,14 +139,6 @@ module Selenium
         def remote_capabilities
           opt = {}
           browser_name = case browser
-                         when :ff_esr
-                           unless ENV['FF_ESR_BINARY']
-                             raise DriverInstantiationError, "ENV['FF_ESR_BINARY'] must be set to test Firefox ESR"
-                           end
-
-                           opt[:firefox_binary] = ENV['FF_ESR_BINARY']
-                           opt[:marionette] = false
-                           :firefox
                          when :safari_preview
                            opt["safari.options"] = {'technologyPreview' => true}
                            :safari
@@ -154,14 +146,7 @@ module Selenium
                            browser
                          end
 
-          caps = WebDriver::Remote::Capabilities.send(browser_name, opt)
-
-          unless caps.is_a? WebDriver::Remote::W3C::Capabilities
-            caps.javascript_enabled = true
-            caps.css_selectors_enabled = true
-          end
-
-          caps
+          WebDriver::Remote::Capabilities.send(browser_name, opt)
         end
 
         def create_driver!(**opts, &block)
@@ -226,17 +211,6 @@ module Selenium
 
         def create_firefox_driver(opt = {})
           WebDriver::Firefox::Binary.path = ENV['FIREFOX_BINARY'] if ENV['FIREFOX_BINARY']
-          WebDriver::Driver.for :firefox, opt
-        end
-
-        def create_ff_esr_driver(opt = {})
-          unless ENV['FF_ESR_BINARY']
-            raise StandardError, "ENV['FF_ESR_BINARY'] must be set to test ESR Firefox"
-          end
-          WebDriver::Firefox::Binary.path = ENV['FF_ESR_BINARY']
-
-          opt[:desired_capabilities] ||= WebDriver::Remote::Capabilities.firefox(marionette: false)
-
           WebDriver::Driver.for :firefox, opt
         end
 
