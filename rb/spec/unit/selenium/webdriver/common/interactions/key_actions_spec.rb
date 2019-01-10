@@ -23,7 +23,7 @@ module Selenium
       let(:keyboard) { instance_double(Interactions::KeyInput) }
       let(:mouse) { instance_double(Interactions::PointerInput) }
       let(:bridge) { double('W3CBridge').as_null_object }
-      let(:builder) { Selenium::WebDriver::W3CActionBuilder.new(bridge, mouse, keyboard) }
+      let(:builder) { Selenium::WebDriver::ActionBuilder.new(bridge, mouse, keyboard) }
       let(:element) { Selenium::WebDriver::Element.new(bridge, 'element') }
       let(:key) { 'a' }
       let(:keys) { 'abc' }
