@@ -1,6 +1,6 @@
 package org.openqa.selenium.devtools.network.events;
 
-import org.openqa.selenium.devtools.network.types.RequestId;
+import org.openqa.selenium.devtools.network.model.RequestId;
 import org.openqa.selenium.json.JsonInput;
 
 /**

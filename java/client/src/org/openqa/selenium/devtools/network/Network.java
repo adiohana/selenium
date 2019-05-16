@@ -20,15 +20,15 @@ import org.openqa.selenium.devtools.network.events.WebSocketClosed;
 import org.openqa.selenium.devtools.network.events.WebSocketCreated;
 import org.openqa.selenium.devtools.network.events.WebSocketFrame;
 import org.openqa.selenium.devtools.network.events.WebSocketFrameError;
-import org.openqa.selenium.devtools.network.types.AuthChallengeResponse;
-import org.openqa.selenium.devtools.network.types.ConnectionType;
-import org.openqa.selenium.devtools.network.types.Cookie;
-import org.openqa.selenium.devtools.network.types.ErrorReason;
-import org.openqa.selenium.devtools.network.types.InterceptionId;
-import org.openqa.selenium.devtools.network.types.RequestId;
-import org.openqa.selenium.devtools.network.types.RequestPattern;
-import org.openqa.selenium.devtools.network.types.ResponseBody;
-import org.openqa.selenium.devtools.network.types.SearchMatch;
+import org.openqa.selenium.devtools.network.model.AuthChallengeResponse;
+import org.openqa.selenium.devtools.network.model.ConnectionType;
+import org.openqa.selenium.devtools.network.model.Cookie;
+import org.openqa.selenium.devtools.network.model.ErrorReason;
+import org.openqa.selenium.devtools.network.model.InterceptionId;
+import org.openqa.selenium.devtools.network.model.RequestId;
+import org.openqa.selenium.devtools.network.model.RequestPattern;
+import org.openqa.selenium.devtools.network.model.ResponseBody;
+import org.openqa.selenium.devtools.network.model.SearchMatch;
 
 import java.util.HashMap;
 import java.util.List;
@@ -377,7 +377,7 @@ public class Network {
   }
 
   /**
-   *  Sets the requests to intercept that match the provided patterns and optionally resource types (EXPERIMENTAL)
+   *  Sets the requests to intercept that match the provided patterns and optionally resource model (EXPERIMENTAL)
    * @param patterns - Requests matching any of these patterns will be forwarded and wait for the corresponding continueInterceptedRequest call.
    * @return DevTools Command
    */

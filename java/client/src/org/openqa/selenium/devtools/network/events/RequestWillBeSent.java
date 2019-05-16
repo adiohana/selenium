@@ -1,11 +1,11 @@
 package org.openqa.selenium.devtools.network.events;
 
-import org.openqa.selenium.devtools.network.types.Initiator;
-import org.openqa.selenium.devtools.network.types.LoaderId;
-import org.openqa.selenium.devtools.network.types.Request;
-import org.openqa.selenium.devtools.network.types.RequestId;
-import org.openqa.selenium.devtools.network.types.ResourceType;
-import org.openqa.selenium.devtools.network.types.Response;
+import org.openqa.selenium.devtools.network.model.Initiator;
+import org.openqa.selenium.devtools.network.model.LoaderId;
+import org.openqa.selenium.devtools.network.model.Request;
+import org.openqa.selenium.devtools.network.model.RequestId;
+import org.openqa.selenium.devtools.network.model.ResourceType;
+import org.openqa.selenium.devtools.network.model.Response;
 import org.openqa.selenium.json.JsonInput;
 
 /**

@@ -1,9 +1,9 @@
 package org.openqa.selenium.devtools.network.events;
 
-import org.openqa.selenium.devtools.network.types.AuthChallenge;
-import org.openqa.selenium.devtools.network.types.ErrorReason;
-import org.openqa.selenium.devtools.network.types.Request;
-import org.openqa.selenium.devtools.network.types.ResourceType;
+import org.openqa.selenium.devtools.network.model.AuthChallenge;
+import org.openqa.selenium.devtools.network.model.ErrorReason;
+import org.openqa.selenium.devtools.network.model.Request;
+import org.openqa.selenium.devtools.network.model.ResourceType;
 import org.openqa.selenium.json.JsonInput;
 
 public class RequestIntercepted {

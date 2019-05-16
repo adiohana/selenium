@@ -5,6 +5,7 @@ import static org.openqa.selenium.devtools.ConverterFunctions.map;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.reflect.TypeToken;
 
+import org.openqa.selenium.Beta;
 import org.openqa.selenium.devtools.Command;
 import org.openqa.selenium.devtools.performance.model.Metric;
 import org.openqa.selenium.devtools.performance.model.TimeDomain;
@@ -15,6 +16,7 @@ import java.util.Objects;
 /**
  *  All available DevTools Network methods and events <a href="https://chromedevtools.github.io/devtools-protocol/tot/Performance">Google Documentation</a>
  */
+@Beta
 public class Performance {
 
   /**

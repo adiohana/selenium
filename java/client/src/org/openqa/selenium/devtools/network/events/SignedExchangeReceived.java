@@ -1,11 +1,11 @@
 package org.openqa.selenium.devtools.network.events;
 
-import org.openqa.selenium.devtools.network.types.RequestId;
-import org.openqa.selenium.devtools.network.types.Response;
-import org.openqa.selenium.devtools.network.types.SecurityDetails;
-import org.openqa.selenium.devtools.network.types.SignedExchangeError;
-import org.openqa.selenium.devtools.network.types.SignedExchangeHeader;
-import org.openqa.selenium.devtools.network.types.SignedExchangeInfo;
+import org.openqa.selenium.devtools.network.model.RequestId;
+import org.openqa.selenium.devtools.network.model.Response;
+import org.openqa.selenium.devtools.network.model.SecurityDetails;
+import org.openqa.selenium.devtools.network.model.SignedExchangeError;
+import org.openqa.selenium.devtools.network.model.SignedExchangeHeader;
+import org.openqa.selenium.devtools.network.model.SignedExchangeInfo;
 import org.openqa.selenium.json.JsonInput;
 
 import java.util.ArrayList;

@@ -18,10 +18,10 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.devtools.network.Network;
 import org.openqa.selenium.devtools.network.events.ResponseReceived;
-import org.openqa.selenium.devtools.network.types.BlockedReason;
-import org.openqa.selenium.devtools.network.types.ConnectionType;
-import org.openqa.selenium.devtools.network.types.ResourceType;
-import org.openqa.selenium.devtools.network.types.ResponseBody;
+import org.openqa.selenium.devtools.network.model.BlockedReason;
+import org.openqa.selenium.devtools.network.model.ConnectionType;
+import org.openqa.selenium.devtools.network.model.ResourceType;
+import org.openqa.selenium.devtools.network.model.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;

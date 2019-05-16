@@ -1,7 +1,7 @@
 package org.openqa.selenium.devtools.network.events;
 
-import org.openqa.selenium.devtools.network.types.MonotonicTime;
-import org.openqa.selenium.devtools.network.types.RequestId;
+import org.openqa.selenium.devtools.network.model.MonotonicTime;
+import org.openqa.selenium.devtools.network.model.RequestId;
 import org.openqa.selenium.json.JsonInput;
 
 public class WebSocketFrameError {
