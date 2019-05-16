@@ -18,6 +18,7 @@ import org.openqa.selenium.devtools.network.events.ResponseReceived;
 import org.openqa.selenium.devtools.network.events.SignedExchangeReceived;
 import org.openqa.selenium.devtools.network.events.WebSocketClosed;
 import org.openqa.selenium.devtools.network.events.WebSocketCreated;
+import org.openqa.selenium.devtools.network.events.WebSocketFrame;
 import org.openqa.selenium.devtools.network.events.WebSocketFrameError;
 import org.openqa.selenium.devtools.network.types.AuthChallengeResponse;
 import org.openqa.selenium.devtools.network.types.ConnectionType;
@@ -86,12 +87,12 @@ public class Network {
 
     params.put("interceptionId", interceptionId);
     errorReason.ifPresent(reason -> params.put("errorReason", errorReason));
-    rawResponse.ifPresent(string -> params.put("rawResponse", rawResponse.toString()));
-    url.ifPresent(string -> params.put("url", url.toString()));
-    method.ifPresent(string -> params.put("method", method.toString()));
-    postData.ifPresent(string -> params.put("postData", postData.toString()));
-    headers.ifPresent(map -> params.put("headers", headers));
-    authChallengeResponse.ifPresent(response -> params.put("authChallengeResponse", authChallengeResponse));
+    errorReason.ifPresent(string -> params.put("rawResponse", rawResponse));
+    errorReason.ifPresent(string -> params.put("url", url));
+    errorReason.ifPresent(string -> params.put("method", method));
+    errorReason.ifPresent(string -> params.put("postData", postData));
+    errorReason.ifPresent(map -> params.put("headers", headers));
+    errorReason.ifPresent(response -> params.put("authChallengeResponse", authChallengeResponse));
 
     return new Command<>(domainName + ".continueInterceptedRequest", params);
 
@@ -111,11 +112,9 @@ public class Network {
 
     Map<String, Object> params = new HashMap<>();
 
-    params.put("name", name);
-
-    url.ifPresent(string -> params.put("url", url.toString()));
-    domain.ifPresent(string -> params.put("domain", domain.toString()));
-    path.ifPresent(string -> params.put("path", path.toString()));
+    url.ifPresent(string -> params.put("url", url));
+    url.ifPresent(string -> params.put("domain", domain));
+    url.ifPresent(string -> params.put("path", path));
 
     return new Command<>(domainName + ".deleteCookies", params);
 
@@ -195,8 +194,7 @@ public class Network {
    * @param urls (Optional) - The list of URLs for which applicable cookies will be fetched
    * @return Array of cookies
    */
-  //TODO: Chrome DevTools - add support for List as command input
-  private static Command<Set<Cookie>> getCookies(Optional<List<String>> urls) {
+  public static Command<Set<Cookie>> getCookies(Optional<List<String>> urls) {
 
     Map<String, Object> params = new HashMap<>();
 
@@ -213,7 +211,7 @@ public class Network {
    */
   public static Command<ResponseBody> getResponseBody(RequestId requestId) {
     Objects.requireNonNull(requestId, "requestId must be set.");
-    return new Command<>(domainName + ".getResponseBody", ImmutableMap.of("requestId", requestId.toString()), map("body", ResponseBody.class));
+    return new Command<>(domainName + ".getResponseBody", ImmutableMap.of("requestId", requestId), map("body", ResponseBody.class));
   }
 
   /**
@@ -277,7 +275,7 @@ public class Network {
 
     Map<String, Object> params = new HashMap<>();
 
-    params.put("requestId", requestId.toString());
+    params.put("requestId", requestId);
     params.put("query", query);
     caseSensitive.ifPresent(bool -> params.put("caseSensitive", caseSensitive));
     isRegex.ifPresent(bool -> params.put("isRegex", isRegex));
@@ -328,7 +326,7 @@ public class Network {
 
     params.put("name", cookie.getName());
     params.put("value", cookie.getValue());
-    url.ifPresent(string -> params.put("url", url.toString()));
+    url.ifPresent(string -> params.put("url", url));
 
     if(cookie.getDomain() != null) {
       params.put("domain", cookie.getDomain());
@@ -400,8 +398,8 @@ public class Network {
     Objects.requireNonNull(userAgent, "userAgent must be set.");
     Map<String, Object> params = new HashMap<>();
 
-    acceptLanguage.ifPresent(string -> params.put("acceptLanguage", acceptLanguage.toString()));
-    platform.ifPresent(string -> params.put("platform", platform.toString()));
+    acceptLanguage.ifPresent(string -> params.put("acceptLanguage", acceptLanguage));
+    platform.ifPresent(string -> params.put("platform", platform));
 
     return new Command<>(domainName + ".setUserAgentOverride", params);
   }
@@ -507,8 +505,17 @@ public class Network {
     return new Event<>(domainName+".webSocketClosed",map("requestId", WebSocketClosed.class));
   }
 
-  //TODO: @GED add events for  Network.webSocketClosed, Network.webSocketCreated, Network.webSocketFrameError
-  //TODO: @GED Network.webSocketFrameReceived, Network.webSocketFrameSent, Network.webSocketHandshakeResponseReceived, Network.webSocketWillSendHandshakeRequest
+  /**
+   *Fired when WebSocket message is received.
+   */
+  public static Event<WebSocketFrame> webSocketFrameReceived(){
+    return new Event<>(domainName+".webSocketFrameReceived",map("requestId", WebSocketFrame.class));
+  }
 
-  //TODO @GED Add test  Network.requestIntercepted,
+  /**
+   * Fired when WebSocket message is sent.
+   */
+  public static Event<WebSocketFrame> webSocketFrameSent(){
+    return new Event<>(domainName+".webSocketFrameSent",map("requestId", WebSocketFrame.class));
+  }
 }
