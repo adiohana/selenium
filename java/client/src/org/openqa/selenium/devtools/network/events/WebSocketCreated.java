@@ -5,7 +5,7 @@ import org.openqa.selenium.devtools.network.types.RequestId;
 import org.openqa.selenium.json.JsonInput;
 
 /**
- * @author dratler
+ * Object for storing Network.webSocketCreated event
  */
 public class WebSocketCreated {
   /**

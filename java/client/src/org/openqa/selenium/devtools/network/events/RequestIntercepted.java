@@ -7,7 +7,7 @@ import org.openqa.selenium.devtools.network.types.ResourceType;
 import org.openqa.selenium.json.JsonInput;
 
 /**
- * @author dratler
+ * Object for storing Network.requestIntercepted event
  */
 public class RequestIntercepted {
 

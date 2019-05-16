@@ -5,7 +5,7 @@ import org.openqa.selenium.devtools.network.types.RequestId;
 import org.openqa.selenium.json.JsonInput;
 
 /**
- * @author dratler
+ * Object for storing Network.webSocketFrameError event
  * */
 public class WebSocketFrameError {
 

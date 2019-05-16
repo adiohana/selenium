@@ -193,8 +193,9 @@ public class Network {
    * Returns all browser cookies for the current URL. Depending on the backend support, will return detailed cookie information in the cookies field
    * @param urls (Optional) - The list of URLs for which applicable cookies will be fetched
    * @return Array of cookies
+   * //TODO: add support for List as input Command
    */
-  public static Command<Set<Cookie>> getCookies(Optional<List<String>> urls) {
+  private static Command<Set<Cookie>> getCookies(Optional<List<String>> urls) {
 
     Map<String, Object> params = new HashMap<>();
 
@@ -211,7 +212,7 @@ public class Network {
    */
   public static Command<ResponseBody> getResponseBody(RequestId requestId) {
     Objects.requireNonNull(requestId, "requestId must be set.");
-    return new Command<>(domainName + ".getResponseBody", ImmutableMap.of("requestId", requestId), map("body", ResponseBody.class));
+    return new Command<>(domainName + ".getResponseBody", ImmutableMap.of("requestId", requestId.toString()), map("body", ResponseBody.class));
   }
 
   /**
