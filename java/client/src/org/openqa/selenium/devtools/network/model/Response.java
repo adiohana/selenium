@@ -3,7 +3,6 @@ package org.openqa.selenium.devtools.network.model;
 import org.openqa.selenium.json.JsonInput;
 import org.openqa.selenium.json.JsonInputConverter;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -402,11 +401,7 @@ public class Response {
           statusText = input.nextString();
           break;
         case "headers":
-          input.beginObject();
-          responseHeaders = new HashMap<>();
-          while (input.hasNext()) {
-            responseHeaders.put(input.nextName(), input.nextString());
-          }
+          responseHeaders = JsonInputConverter.extractMap(input);
           break;
         case "headersText":
           headersText = input.nextString();
@@ -449,6 +444,9 @@ public class Response {
           break;
         case "securityDetails":
           securityDetails = SecurityDetails.parseSecurityDetails(input);
+          break;
+        case "timing":
+          timing = ResourceTiming.parse(input);
           break;
         default:
           input.skipValue();

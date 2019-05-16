@@ -4,6 +4,7 @@ import org.openqa.selenium.json.JsonInput;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Security details about a request
@@ -13,11 +14,15 @@ public class SecurityDetails {
   private String protocol;
 
   private String keyExchange;
-
+  /**
+   * optional
+   */
   private String keyExchangeGroup;
 
   private String cipher;
-
+  /**
+   * optional
+   */
   private String mac;
 
   private Integer certificateId;
@@ -45,19 +50,23 @@ public class SecurityDetails {
                          Double validFrom, Double validTo,
                          List<SignedCertificateTimestamp> signedCertificateTimestampList,
                          CertificateTransparencyCompliance certificateTransparencyCompliance) {
-    this.protocol = protocol;
-    this.keyExchange = keyExchange;
+    this.protocol = Objects.requireNonNull(protocol, "'protocol' is require");
+    this.keyExchange = Objects.requireNonNull(keyExchange, "'keyExchange' is require");
     this.keyExchangeGroup = keyExchangeGroup;
-    this.cipher = cipher;
+    this.cipher = Objects.requireNonNull(cipher, "'cipher' is require");
     this.mac = mac;
-    this.certificateId = certificateId;
-    this.subjectName = subjectName;
-    this.sanList = sanList;
-    this.issuer = issuer;
-    this.validFrom = validFrom;
-    this.validTo = validTo;
-    this.signedCertificateTimestampList = signedCertificateTimestampList;
-    this.certificateTransparencyCompliance = certificateTransparencyCompliance;
+    this.certificateId = Objects.requireNonNull(certificateId, "'certificateId' is require");
+    this.subjectName = Objects.requireNonNull(subjectName, "'subjectName' is require");
+    this.sanList = Objects.requireNonNull(sanList, "'sanList' is require");
+    this.issuer = Objects.requireNonNull(issuer, "'issuer' is require");
+    this.validFrom = Objects.requireNonNull(validFrom, "'validFrom' is require");
+    this.validTo = Objects.requireNonNull(validTo, "'validTo' is require");
+    this.signedCertificateTimestampList =
+        Objects.requireNonNull(signedCertificateTimestampList,
+                               "'signedCertificateTimestampList' is require");
+    this.certificateTransparencyCompliance =
+        Objects.requireNonNull(certificateTransparencyCompliance,
+                               "'certificateTransparencyCompliance' is require");
   }
 
   /**

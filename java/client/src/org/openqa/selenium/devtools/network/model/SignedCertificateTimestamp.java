@@ -1,5 +1,7 @@
 package org.openqa.selenium.devtools.network.model;
 
+import static java.util.Objects.requireNonNull;
+
 import org.openqa.selenium.json.JsonInput;
 
 /**
@@ -23,119 +25,45 @@ public class SignedCertificateTimestamp {
 
   private String signatureData;
 
-  public SignedCertificateTimestamp() {
-  }
 
   public SignedCertificateTimestamp(String status, String origin, String logDescription,
                                     String logId, Double timestamp, String hashAlgorithm,
                                     String signatureAlgorithm, String signatureData) {
-    this.status = status;
-    this.origin = origin;
-    this.logDescription = logDescription;
-    this.logId = logId;
-    this.timestamp = timestamp;
-    this.hashAlgorithm = hashAlgorithm;
-    this.signatureAlgorithm = signatureAlgorithm;
-    this.signatureData = signatureData;
-  }
+    this.status = requireNonNull(status, "'status' is require");
 
-  /** Validation status. */
-  public String getStatus() {
-    return status;
-  }
+    this.origin = requireNonNull(origin, "'origin' is require");
 
-  /** Validation status. */
-  public void setStatus(String status) {
-    this.status = status;
-  }
+    this.logDescription = requireNonNull(logDescription, "'logDescription' is require");
 
-  /** Origin. */
-  public String getOrigin() {
-    return origin;
-  }
+    this.logId = requireNonNull(logId, "'logId' is require");
 
-  /** Origin. */
-  public void setOrigin(String origin) {
-    this.origin = origin;
-  }
+    this.timestamp = requireNonNull(timestamp, "'timestamp' is require");
 
-  /** Log name / description. */
-  public String getLogDescription() {
-    return logDescription;
-  }
+    this.hashAlgorithm = requireNonNull(hashAlgorithm, "'hashAlgorithm' is require");
 
-  /** Log name / description. */
-  public void setLogDescription(String logDescription) {
-    this.logDescription = logDescription;
-  }
+    this.signatureAlgorithm = requireNonNull(signatureAlgorithm, "'signatureAlgorithm' is require");
 
-  /** Log ID. */
-  public String getLogId() {
-    return logId;
-  }
+    this.signatureData = requireNonNull(signatureData, "'signatureData' is require");
 
-  /** Log ID. */
-  public void setLogId(String logId) {
-    this.logId = logId;
-  }
-
-  /** Issuance date. */
-  public Double getTimestamp() {
-    return timestamp;
-  }
-
-  /** Issuance date. */
-  public void setTimestamp(Double timestamp) {
-    this.timestamp = timestamp;
-  }
-
-  /** Hash algorithm. */
-  public String getHashAlgorithm() {
-    return hashAlgorithm;
-  }
-
-  /** Hash algorithm. */
-  public void setHashAlgorithm(String hashAlgorithm) {
-    this.hashAlgorithm = hashAlgorithm;
-  }
-
-  /** Signature algorithm. */
-  public String getSignatureAlgorithm() {
-    return signatureAlgorithm;
-  }
-
-  /** Signature algorithm. */
-  public void setSignatureAlgorithm(String signatureAlgorithm) {
-    this.signatureAlgorithm = signatureAlgorithm;
-  }
-
-  /** Signature data. */
-  public String getSignatureData() {
-    return signatureData;
-  }
-
-  /** Signature data. */
-  public void setSignatureData(String signatureData) {
-    this.signatureData = signatureData;
   }
 
   public static SignedCertificateTimestamp parseSignedCertificateTimestamp(JsonInput input) {
 
-     String status = null;
+    String status = null;
 
-     String origin = null;
+    String origin = null;
 
-     String logDescription = null;
+    String logDescription = null;
 
-     String logId = null;
+    String logId = null;
 
-     Number timestamp = null;
+    Number timestamp = null;
 
-     String hashAlgorithm = null;
+    String hashAlgorithm = null;
 
-     String signatureAlgorithm = null;
+    String signatureAlgorithm = null;
 
-     String signatureData = null;
+    String signatureData = null;
 
     input.beginObject();
 
@@ -173,7 +101,121 @@ public class SignedCertificateTimestamp {
 
     }
 
-    return new SignedCertificateTimestamp(status, origin, logDescription, logId, Double.valueOf(String.valueOf(timestamp)), hashAlgorithm, signatureAlgorithm, signatureData);
+    return new SignedCertificateTimestamp(status, origin, logDescription, logId,
+                                          Double.valueOf(String.valueOf(timestamp)), hashAlgorithm,
+                                          signatureAlgorithm, signatureData);
 
+  }
+
+  /**
+   * Validation status.
+   */
+  public String getStatus() {
+    return status;
+  }
+
+  /**
+   * Validation status.
+   */
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  /**
+   * Origin.
+   */
+  public String getOrigin() {
+    return origin;
+  }
+
+  /**
+   * Origin.
+   */
+  public void setOrigin(String origin) {
+    this.origin = origin;
+  }
+
+  /**
+   * Log name / description.
+   */
+  public String getLogDescription() {
+    return logDescription;
+  }
+
+  /**
+   * Log name / description.
+   */
+  public void setLogDescription(String logDescription) {
+    this.logDescription = logDescription;
+  }
+
+  /**
+   * Log ID.
+   */
+  public String getLogId() {
+    return logId;
+  }
+
+  /**
+   * Log ID.
+   */
+  public void setLogId(String logId) {
+    this.logId = logId;
+  }
+
+  /**
+   * Issuance date.
+   */
+  public Double getTimestamp() {
+    return timestamp;
+  }
+
+  /**
+   * Issuance date.
+   */
+  public void setTimestamp(Double timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  /**
+   * Hash algorithm.
+   */
+  public String getHashAlgorithm() {
+    return hashAlgorithm;
+  }
+
+  /**
+   * Hash algorithm.
+   */
+  public void setHashAlgorithm(String hashAlgorithm) {
+    this.hashAlgorithm = hashAlgorithm;
+  }
+
+  /**
+   * Signature algorithm.
+   */
+  public String getSignatureAlgorithm() {
+    return signatureAlgorithm;
+  }
+
+  /**
+   * Signature algorithm.
+   */
+  public void setSignatureAlgorithm(String signatureAlgorithm) {
+    this.signatureAlgorithm = signatureAlgorithm;
+  }
+
+  /**
+   * Signature data.
+   */
+  public String getSignatureData() {
+    return signatureData;
+  }
+
+  /**
+   * Signature data.
+   */
+  public void setSignatureData(String signatureData) {
+    this.signatureData = signatureData;
   }
 }

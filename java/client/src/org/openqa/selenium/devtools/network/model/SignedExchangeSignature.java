@@ -1,5 +1,7 @@
 package org.openqa.selenium.devtools.network.model;
 
+import static java.util.Objects.requireNonNull;
+
 import org.openqa.selenium.json.JsonInput;
 
 import java.util.ArrayList;
@@ -28,22 +30,20 @@ public class SignedExchangeSignature {
 
   private List<String> certificates;
 
-  public SignedExchangeSignature() {
-  }
 
   public SignedExchangeSignature(String label, String signature, String integrity,
                                  String certUrl, String certSha256, String validityUrl,
                                  Integer date, Integer expires,
                                  List<String> certificates) {
-    this.label = label;
-    this.signature = signature;
-    this.integrity = integrity;
-    this.certUrl = certUrl;
-    this.certSha256 = certSha256;
-    this.validityUrl = validityUrl;
-    this.date = date;
-    this.expires = expires;
-    this.certificates = certificates;
+    this.label = requireNonNull(label, "'label' is require");
+    this.signature = requireNonNull(signature, "'signature' is require");
+    this.integrity = requireNonNull(integrity, "'integrity' is require");
+    this.certUrl = requireNonNull(certUrl, "'certUrl' is require");
+    this.certSha256 = requireNonNull(certSha256, "'certSha256' is require");
+    this.validityUrl = requireNonNull(validityUrl, "'validityUrl' is require");
+    this.date = requireNonNull(date, "'date' is require");
+    this.expires = requireNonNull(expires, "'expires' is require");
+    this.certificates = requireNonNull(certificates, "'certificates' is require");
   }
 
   /**
@@ -236,6 +236,8 @@ public class SignedExchangeSignature {
 
     }
 
-    return new SignedExchangeSignature(label, signature, integrity, certUrl, certSha256, validityUrl, Integer.valueOf(String.valueOf(date)), Integer.valueOf(String.valueOf(expires)), certificates);
+    return new SignedExchangeSignature(label, signature, integrity, certUrl, certSha256,
+                                       validityUrl, Integer.valueOf(String.valueOf(date)),
+                                       Integer.valueOf(String.valueOf(expires)), certificates);
   }
 }

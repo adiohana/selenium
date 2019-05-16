@@ -1,6 +1,9 @@
 package org.openqa.selenium.devtools.network.model;
 
+import static java.util.Objects.requireNonNull;
+
 import org.openqa.selenium.json.JsonInput;
+import org.openqa.selenium.json.JsonInputConverter;
 
 /**
  * WebSocket message data. This represents an entire WebSocket message, not just a fragmented frame as the name suggests.
@@ -10,7 +13,7 @@ public class WebSocketFrame {
   /**
    * WebSocket message opcode.
    */
-  private Number opcode;
+  private Double opcode;
   /**
    * WebSocket message mask.
    */
@@ -21,32 +24,40 @@ public class WebSocketFrame {
    */
   private String payloadData;
 
+  public WebSocketFrame(Double opcode, boolean mask, String payloadData) {
+    this.opcode = requireNonNull(opcode, "'opcode' is require");
+    this.mask = requireNonNull(mask, "'mask' is require");
+    this.payloadData = requireNonNull(payloadData, "'payloadData' is require");
+  }
+
   public static WebSocketFrame parse(JsonInput input){
-    WebSocketFrame webSocketFrame = new WebSocketFrame();
+    Double opcode = null;
+    Boolean mask = null;
+    String payloadData = null;
     while (input.hasNext()){
       switch (input.nextName()){
         case "opcode":
-          webSocketFrame.setOpcode(input.nextNumber());
+          opcode = JsonInputConverter.extractDouble(input);
           break;
         case "mask" :
-          webSocketFrame.setMask(input.nextBoolean());
+          mask = input.nextBoolean();
           break;
         case "payloadData" :
-          webSocketFrame.setPayloadData(input.nextString());
+          payloadData = input.nextString();
           break;
         default:
           input.skipValue();
           break;
       }
     }
-    return webSocketFrame;
+    return new WebSocketFrame(opcode, mask, payloadData);
   }
 
   public Number getOpcode() {
     return opcode;
   }
 
-  public void setOpcode(Number opcode) {
+  public void setOpcode(Double opcode) {
     this.opcode = opcode;
   }
 

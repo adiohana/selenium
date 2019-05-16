@@ -11,8 +11,6 @@ public class RequestPattern {
 
   private InterceptionStage interceptionStage;
 
-  public RequestPattern() {
-  }
 
   public RequestPattern(String urlPattern,
                         ResourceType resourceType,

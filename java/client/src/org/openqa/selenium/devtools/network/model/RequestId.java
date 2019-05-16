@@ -37,8 +37,4 @@ public class RequestId {
     return new RequestId(requestId);
   }
 
-  private String toJson() {
-    return requestId;
-  }
-
 }

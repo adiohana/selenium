@@ -2,6 +2,8 @@ package org.openqa.selenium.devtools.network.model;
 
 import org.openqa.selenium.json.JsonInput;
 
+import java.util.Objects;
+
 /**
  * Object for storing Network response
  */
@@ -18,8 +20,8 @@ public class ResponseBody {
   private final Boolean base64Encoded;
 
   public ResponseBody(String body, Boolean base64Encoded) {
-    this.body = body;
-    this.base64Encoded = base64Encoded;
+    this.body = Objects.requireNonNull(body, "'body' is require");
+    this.base64Encoded = Objects.requireNonNull(base64Encoded, "'base64Encoded' is require");
   }
 
   private static ResponseBody fromJson(JsonInput input) {
@@ -32,7 +34,6 @@ public class ResponseBody {
         case "base64Encoded":
           base64Encoded = input.nextBoolean();
           break;
-
         default:
           input.skipValue();
           break;
