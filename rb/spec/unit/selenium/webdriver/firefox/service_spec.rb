@@ -123,6 +123,11 @@ module Selenium
           allow(Firefox::Binary).to receive(:path).and_return('/foo/bar')
         end
 
+        before do
+          allow(Remote::Bridge).to receive(:new).and_return(bridge)
+          allow(Firefox::Binary).to receive(:path).and_return('/foo/bar')
+        end
+
         it 'is not created when :url is provided' do
           expect(Service).not_to receive(:new)
 
